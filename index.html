@@ -198,6 +198,47 @@ footer p{color:#dbc9bc}
 .zone.is-pickup { background: var(--green); color: var(--cream); border-color: var(--green); }
 .zone.is-pickup .fee { color: rgba(245,242,236,.75); }
 .zone.is-pickup li { background: rgba(245,242,236,.12); color: rgba(245,242,236,.9); }
+
+/* ESTILOS EXCLUSIVOS PARA ASIMILAR TU MAQUETA EN IMAGEN */
+    .seccion-cajas-v { display: flex; flex-direction: column; gap: 8px; margin: 15px 0; text-align: left; padding: 0 10px; }
+    .item-radio-v { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: bold; cursor: pointer; color: #4a2c11; }
+    .item-radio-v input[type="radio"] { width: 20px; height: 20px; accent-color: #4a2c11; cursor: pointer; }
+    
+    .fila-precio-contador { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding: 0 10px; }
+    .precio-dinamico { font-size: 18px; font-weight: bold; color: #b01e23; }
+    
+    .controles-cantidad { display: flex; align-items: center; background: #fdfaf7; border: 1px solid #e0d0c0; border-radius: 20px; padding: 2px 6px; }
+    .btn-cant { background: none; border: none; font-size: 16px; font-weight: bold; width: 24px; height: 24px; cursor: pointer; color: #4a2c11; }
+    .num-cant { font-size: 14px; font-weight: bold; min-width: 20px; text-align: center; }
+    
+    .btn-agregar-final { background: #3d1c06; color: white; border: none; padding: 12px; border-radius: 25px; font-weight: bold; font-size: 14px; cursor: pointer; width: 100%; margin-top: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .btn-agregar-final:hover { background: #261003; }
+
+    /* REJILLA COMPLETAMENTE ADAPTATIVA (RESPONSIVE) */
+.grid-sabores { 
+    display: grid; 
+    /* El truco es 'minmax(0, 1fr)', que permite a la tarjeta encogerse libremente si la pantalla mide menos de 320px */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); 
+    gap: 25px; 
+    max-width: 1200px; 
+    margin: 30px auto; 
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* AJUSTE PARA LA TARJETA CARD */
+.card { 
+    background: white; 
+    border-radius: 12px; 
+    padding: 20px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+    border: 1px solid #eee; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    box-sizing: border-box; /* Asegura que el padding no estire la tarjeta en pantallas chicas */
+    width: 100%;
+}
 </style>
 </head>
 <body>
@@ -275,7 +316,7 @@ Elaborados conscientemente para ti.</br>
     <div class="photo about-photo">
       <img src="imagenes/hero-bars.webp" alt="Brownie de chocolate cortado">
     </div>
-    <div>
+    <div> 
       <div class="section-kicker">Un poco de historia</div>
       <h2 class="section-title">Misión y Visión</h2>
       <p class="lead"></p>
@@ -311,77 +352,218 @@ Elaborados conscientemente para ti.</br>
     <h2 class="section-title">Brownies para cada antojo.</h2>
     <p class="lead">Elige tu favorito, selecciona la cantidad y agrégalo a tu pedido.</p>
 
-    <div class="product-grid">
-      <article class="product-card" data-name="Brownie clásico" data-price="8">
-        <div class="product-image"><img src="imagenes/BroCaramelo.png" alt="Brownie clásico"></div>
-        <div class="product-info">
-          <div class="product-tag">CLÁSICO</div>
-          <h3>Clásico de Platano</h3>
-          <p>Brownie clásico de almendras y avena sin gluten, crema de maní y avellanas, sal de maras y chocolate sin azúcar 70%.</p>
-          <div class="product-bottom">
-            <strong>S/ 8.00</strong>
-            <div class="qty"><button type="button" onclick="changeQty(this,-1)">−</button><span>1</span><button type="button" onclick="changeQty(this,1)">+</button></div>
-          </div>
-          <button class="add-btn" type="button" onclick="addProduct(this)">AGREGAR AL PEDIDO</button>
-        </div>
-      </article>
+        <!-- NUEVA SECCIÓN DE NUESTRA CARTA  -->
+    <div class="grid-sabores">
+        
+        <!-- 1. Brownie Clásico -->
+        <div class="card" id="card-clasico">
+          <div class="product-image"><img src="imagenes/BroCaramelo.png" alt="Brownie clásico"></div>
+            <div class="product-info">
+                <span class="product-tag">CLÁSICO</span>
+                <h3>Brownie Clásico</h3>
+                <p>Brownie clásico de platano y avena sin gluten, crema de maní y avellanas, sal de maras y chocolate sin azúcar 70%.</p>
+            </div>
+            
+            <div class="seccion-cajas-v">
+                <label class="item-radio-v">
+                    <span>Caja x 3</span>
+                    <input type="radio" name="caja-clasico" value="3.50" data-nombre="Caja x 3 - Clásico" onclick="actualizarPrecioTarjeta('clasico', 3.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 6</span>
+                    <input type="radio" name="caja-clasico" value="6.50" data-nombre="Caja x 3 - Clásico" onclick="actualizarPrecioTarjeta('clasico', 6.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 9</span>
+                    <input type="radio" name="caja-clasico" value="9.50" data-nombre="Caja x 3 - Clásico" onclick="actualizarPrecioTarjeta('clasico', 9.50)">
+                </label>
+            </div>
 
-      <article class="product-card" data-name="Brownie con nueces" data-price="10">
-        <div class="product-image"><img src="imagenes/BroChocomani.png" alt="Brownie con Oreo"></div>
-        <div class="product-info">
-          <div class="product-tag">FAVORITO</div>
-          <h3>Brownie Oreo</h3>
-          <p>Brownie clásico de almendras y avena sin gluten con mousse, Oreo y chocolate sin azúcar.</p>
-          <div class="product-bottom">
-            <strong>S/ 10.00</strong>
-            <div class="qty"><button type="button" onclick="changeQty(this,-1)">−</button><span>1</span><button type="button" onclick="changeQty(this,1)">+</button></div>
-          </div>
-          <button class="add-btn" type="button" onclick="addProduct(this)">AGREGAR AL PEDIDO</button>
+            <div class="fila-precio-contador">
+                <span class="precio-dinamico" id="precio-clasico">S/. 0.00</span>
+                <div class="controles-cantidad">
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('clasico', -1)">−</button>
+                    <span class="num-cant" id="cant-clasico">1</span>
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('clasico', 1)">+</button>
+                </div>
+            </div>
+            <button type="button" class="btn-agregar-final" onclick="agregarCajaAlPedidoFinal('clasico')">AGREGAR AL PEDIDO</button>
         </div>
-      </article>
 
-      <article class="product-card" data-name="Brownie con manjar" data-price="11">
-        <div class="product-image"><img src="imagenes/BroManjar.png" alt="Brownie Red Velvet"></div>
-        <div class="product-info">
-          <div class="product-tag">DULCE</div>
-          <h3>Brownie Red Velvet</h3>
-          <p>Una combinación cremosa y dulce para los más golosos.</p>
-          <div class="product-bottom">
-            <strong>S/ 11.00</strong>
-            <div class="qty"><button type="button" onclick="changeQty(this,-1)">−</button><span>1</span><button type="button" onclick="changeQty(this,1)">+</button></div>
-          </div>
-          <button class="add-btn" type="button" onclick="addProduct(this)">AGREGAR AL PEDIDO</button>
-        </div>
-      </article>
+        <!-- 2. Brownie Maní -->
+        <div class="card" id="card-mani">
+            <div class="product-image"><img src="imagenes/BroChocomani.png" alt="Brownie con nueces"></div>
+            <div class="product-info">
+                <span class="product-tag">FAVORITO</span>
+                <h3>Brownie Maní</h3>
+                <p>Brownie con maní y avena sin gluten con chocolate sin azúcar.</p>
+            </div>
+            
+            <div class="seccion-cajas-v">
+                <label class="item-radio-v">
+                    <span>Caja x 3</span>
+                    <input type="radio" name="caja-mani" value="3.50" onclick="actualizarPrecioTarjeta('mani', 3.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 6</span>
+                    <input type="radio" name="caja-mani" value="6.50" onclick="actualizarPrecioTarjeta('mani', 6.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 9</span>
+                    <input type="radio" name="caja-mani" value="9.50" onclick="actualizarPrecioTarjeta('mani', 9.50)">
+                </label>
+            </div>
 
-      <article class="product-card" data-name="Brownie con Mani" data-price="10">
-        <div class="product-image"><img src="imagenes/BroChips.png" alt="Brownie con Maní"></div>
-        <div class="product-info">
-          <div class="product-tag">CHOCOLATE</div>
-          <h3>Brownie con chips</h3>
-          <p>Más chocolate en cada bocado, con chips suaves y derretidos.</p>
-          <div class="product-bottom">
-            <strong>S/ 10.00</strong>
-            <div class="qty"><button type="button" onclick="changeQty(this,-1)">−</button><span>1</span><button type="button" onclick="changeQty(this,1)">+</button></div>
-          </div>
-          <button class="add-btn" type="button" onclick="addProduct(this)">AGREGAR AL PEDIDO</button>
+            <div class="fila-precio-contador">
+                <span class="precio-dinamico" id="precio-mani">S/. 0.00</span>
+                <div class="controles-cantidad">
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('mani', -1)">−</button>
+                    <span class="num-cant" id="cant-mani">1</span>
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('mani', 1)">+</button>
+                </div>
+            </div>
+            <button type="button" class="btn-agregar-final" onclick="agregarCajaAlPedidoFinal('mani')">AGREGAR AL PEDIDO</button>
         </div>
-      </article>
 
-      <article class="product-card" data-name="Brownie de chocolate blanco" data-price="11">
-        <div class="product-image"><img src="imagenes/BroChoBlanco.png" alt="Brownie de chocolate blanco"></div>
-        <div class="product-info">
-          <div class="product-tag">ESPECIAL</div>
-          <h3>Chocolate blanco</h3>
-          <p>Una versión suave y dulce con el toque especial del chocolate blanco.</p>
-          <div class="product-bottom">
-            <strong>S/ 11.00</strong>
-            <div class="qty"><button type="button" onclick="changeQty(this,-1)">−</button><span>1</span><button type="button" onclick="changeQty(this,1)">+</button></div>
-          </div>
-          <button class="add-btn" type="button" onclick="addProduct(this)">AGREGAR AL PEDIDO</button>
+        <!-- 3. Brownie Oreo -->
+        <div class="card" id="card-oreo">
+            <div class="product-image"><img src="imagenes/broworeo.png" alt="Brownie oreo"></div>
+            <div class="product-info">
+                <span class="product-tag">DULCE</span>
+                <h3>Brownie Oreo</h3>
+                <p>Una combinación de chocolate y Oreo en un Brownie que ofrece una experiencia única.</p>
+            </div>
+            
+            <div class="seccion-cajas-v">
+                <label class="item-radio-v">
+                    <span>Caja x 3</span>
+                    <input type="radio" name="caja-oreo" value="3.50" onclick="actualizarPrecioTarjeta('oreo', 3.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 6</span>
+                    <input type="radio" name="caja-oreo" value="6.50" onclick="actualizarPrecioTarjeta('oreo', 6.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 9</span>
+                    <input type="radio" name="caja-oreo" value="9.50" onclick="actualizarPrecioTarjeta('oreo', 9.50)">
+                </label>
+            </div>
+
+            <div class="fila-precio-contador">
+                <span class="precio-dinamico" id="precio-oreo">S/. 0.00</span>
+                <div class="controles-cantidad">
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('oreo', -1)">−</button>
+                    <span class="num-cant" id="cant-oreo">1</span>
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('oreo', 1)">+</button>
+                </div>
+            </div>
+            <button type="button" class="btn-agregar-final" onclick="agregarCajaAlPedidoFinal('oreo')">AGREGAR AL PEDIDO</button>
         </div>
-      </article>
-    </div>
+
+        <!-- 4. Brownie Red Velvet -->
+        <div class="card" id="card-redvelvet">
+            <div class="product-image"><img src="imagenes/borwred.png" alt="Brownie Red Velvet"></div>
+            <div class="product-info">
+                <span class="product-tag">DULCE</span>
+                <h3>Brownie Red Velvet</h3>
+                <p>Esponjoso, intensamente chocolatoso y con un vibrante color rojo natural sin una sola gota de azúcar añadida.</p>
+            </div>
+            
+            <div class="seccion-cajas-v">
+                <label class="item-radio-v">
+                    <span>Caja x 3</span>
+                    <input type="radio" name="caja-redvelvet" value="3.50" onclick="actualizarPrecioTarjeta('redvelvet', 3.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 6</span>
+                    <input type="radio" name="caja-redvelvet" value="6.50" onclick="actualizarPrecioTarjeta('redvelvet', 6.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 9</span>
+                    <input type="radio" name="caja-redvelvet" value="9.50" onclick="actualizarPrecioTarjeta('redvelvet', 9.50)">
+                </label>
+            </div>
+
+            <div class="fila-precio-contador">
+                <span class="precio-dinamico" id="precio-redvelvet">S/. 0.00</span>
+                <div class="controles-cantidad">
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('redvelvet', -1)">−</button>
+                    <span class="num-cant" id="cant-redvelvet">1</span>
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('redvelvet', 1)">+</button>
+                </div>
+            </div>
+            <button type="button" class="btn-agregar-final" onclick="agregarCajaAlPedidoFinal('redvelvet')">AGREGAR AL PEDIDO</button>
+        </div>
+
+        <!-- 5. Brownie con Chispitas -->
+        <div class="card" id="card-chispas">
+           <div class="product-image"><img src="imagenes/browchip.png" alt="Brownie con chips de chocolate"></div>
+            <div class="product-info">
+                <span class="product-tag">CHOCOLATE</span>
+                <h3>Brownie con Chispitas</h3>
+                <p>Brownie de chocolate con chispitas de colores que permite disfrutar de un sabor más intenso en cada bocado.</p>
+            </div>
+            
+            <div class="seccion-cajas-v">
+                <label class="item-radio-v">
+                    <span>Caja x 3</span>
+                    <input type="radio" name="caja-chispas" value="3.50" onclick="actualizarPrecioTarjeta('chispas', 3.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 6</span>
+                    <input type="radio" name="caja-chispas" value="6.50" onclick="actualizarPrecioTarjeta('chispas', 6.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 9</span>
+                    <input type="radio" name="caja-chispas" value="9.50" onclick="actualizarPrecioTarjeta('chispas', 9.50)">
+                </label>
+            </div>
+
+            <div class="fila-precio-contador">
+                <span class="precio-dinamico" id="precio-chispas">S/. 0.00</span>
+                <div class="controles-cantidad">
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('chispas', -1)">−</button>
+                    <span class="num-cant" id="cant-chispas">1</span>
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('chispas', 1)">+</button>
+                </div>
+            </div>
+            <button type="button" class="btn-agregar-final" onclick="agregarCajaAlPedidoFinal('chispas')">AGREGAR AL PEDIDO</button>
+        </div>
+  
+    <!-- 6. Brownie con Chispitas -->
+        <div class="card" id="card-chispas">
+           <div class="product-image"><img src="imagenes/BroChoBlanco.png" alt="Brownie chocolate blanco"></div>
+            <div class="product-info">
+                <span class="product-tag">CHOCOLATE BLANCO</span>
+                <h3>Chocolate blanco</h3>
+                <p>Un delicioso brownie de chocolate blanco que combina un sabor inolvidable en cada bocado.</p>
+            </div>
+            
+            <div class="seccion-cajas-v">
+                <label class="item-radio-v">
+                    <span>Caja x 3</span>
+                    <input type="radio" name="caja-chispas" value="3.50" onclick="actualizarPrecioTarjeta('chispas', 3.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 6</span>
+                    <input type="radio" name="caja-chispas" value="6.50" onclick="actualizarPrecioTarjeta('chispas', 6.50)">
+                </label>
+                <label class="item-radio-v">
+                    <span>Caja x 9</span>
+                    <input type="radio" name="caja-chispas" value="9.50" onclick="actualizarPrecioTarjeta('chispas', 9.50)">
+                </label>
+            </div>
+
+            <div class="fila-precio-contador">
+                <span class="precio-dinamico" id="precio-chispas">S/. 0.00</span>
+                <div class="controles-cantidad">
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('chispas', -1)">−</button>
+                    <span class="num-cant" id="cant-chispas">1</span>
+                    <button type="button" class="btn-cant" onclick="cambiarContadorUnidades('chispas', 1)">+</button>
+                </div>
+            </div>
+            <button type="button" class="btn-agregar-final" onclick="agregarCajaAlPedidoFinal('chispas')">AGREGAR AL PEDIDO</button>
+        </div>
   </div>
 </section>
 
@@ -431,7 +613,7 @@ Elaborados conscientemente para ti.</br>
     <h2 class="section-title">Contacto</h2>
     <p class="lead">Canales reales de BROWNITY.</p>
     <div class="card-grid">
-      <div class="card"><div class="ingredient-icon">💬</div><h3>WhatsApp</h3><p>936 733 092</p></div>
+      <div class="card"><div class="ingredient-icon">💬</div><h3>WhatsApp</h3><p>945 252 125</p></div>
       <div class="card"><div class="ingredient-icon">📸</div><h3>Instagram</h3><p><a href="https://www.instagram.com/browniiity/" target="_blank" rel="noopener noreferrer">@browniiity</a></p></div>
       <div class="card"><div class="ingredient-icon">🎵</div><h3>TikTok</h3><p><a href="https://www.tiktok.com/@browniiity" target="_blank" rel="noopener noreferrer">@browniiity</a></p></div>
     </div>
@@ -442,16 +624,20 @@ Elaborados conscientemente para ti.</br>
 <section id="video">
   <div class="container">
     <div class="video-box">
-      <div>
+     <!-- <div>
         <div class="play">▶</div>
-        <h2>¿Listos para verlo en acción?</h2>
-        <p>Aquí colocaremos posteriormente el video del proceso de preparación. El botón está preparado para enlazar un video de YouTube o Google Drive.</p>
-        <!-- CAMBIA EL ENLACE DE ABAJO POR TU VIDEO -->
-        <a class="btn" id="videoButton" href="#" target="_blank" rel="noopener" onclick="videoPlaceholder(event)">🎥 VER EL PROCESO</a>
+        <h2>Video Publicitario</h2>
+         <p>Video Publicitario.</p>
+        <a class="btn" id="videoButton" href="https://www.youtube.com/watch?v=FdZWmjCS_AU" target="_blank" rel="noopener" onclick="videoPlaceholder(event)">🎥 VER </a>
+      </div>-->
+      <div> 
+        <iframe width="315" height="560" src="https://www.youtube.com/embed/FdZWmjCS_AU" title="BROWNITY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </div>
+
   </div>
 </section>
+
 </main>
 
 <footer>
@@ -477,54 +663,204 @@ Elaborados conscientemente para ti.</br>
 <div class="toast" id="toast">Agrega el enlace de tu video en el código.</div>
 
 <script>
+// ==========================================
+// 1. FUNCIONES ORIGINALES DE TU MENÚ Y WEB
+// ==========================================
 function toggleMenu(){
-  const nav=document.getElementById('navLinks');
-  const btn=document.querySelector('.menu-btn');
-  nav.classList.toggle('open');
-  btn.setAttribute('aria-expanded',nav.classList.contains('open'));
-}
-function closeMenu(){
-  document.getElementById('navLinks').classList.remove('open');
-  document.querySelector('.menu-btn').setAttribute('aria-expanded','false');
-}
-function videoPlaceholder(e){
-  const href=document.getElementById('videoButton').getAttribute('href');
-  if(!href || href==="#"){
-    e.preventDefault();
-    const toast=document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(()=>toast.classList.remove('show'),2800);
+  const nav = document.getElementById('navLinks');
+  const btn = document.querySelector('.menu-btn');
+  if (nav && btn) {
+    nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', nav.classList.contains('open'));
   }
 }
 
-let cart=[];
-function changeQty(btn,delta){
-  const span=btn.parentElement.querySelector('span');
-  let n=Math.max(1,Number(span.textContent)+delta);
-  span.textContent=n;
-}
-function addProduct(btn){
-  const card=btn.closest('.product-card');
-  const name=card.dataset.name, price=Number(card.dataset.price);
-  const qty=Number(card.querySelector('.qty span').textContent);
-  const found=cart.find(x=>x.name===name);
-  if(found) found.qty+=qty; else cart.push({name,price,qty});
-  renderCart();
-}
-function renderCart(){
-  const count=cart.reduce((s,x)=>s+x.qty,0);
-  const badge=document.getElementById('cartCount'); if(badge) badge.textContent=count;
-  const panel=document.getElementById('cartPanel'); if(!panel)return;
-  panel.querySelector('.cart-items').innerHTML=cart.length?cart.map(x=>`<div class="cart-row"><span>${x.name} × ${x.qty}</span><strong>S/ ${(x.price*x.qty).toFixed(2)}</strong></div>`).join(''):'<p>Tu pedido está vacío.</p>';
-  const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
-  panel.querySelector('.cart-total strong').textContent='S/ '+total.toFixed(2);
-}
-function toggleCart(e){
-  if(e)e.preventDefault();
-  document.getElementById('cartPanel').classList.toggle('show');
-  renderCart();
+function closeMenu(){
+  const nav = document.getElementById('navLinks');
+  if (nav) nav.classList.remove('open');
+  const btn = document.querySelector('.menu-btn');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
 }
 
+function videoPlaceholder(e){
+  const href = document.getElementById('videoButton') ? document.getElementById('videoButton').getAttribute('href') : null;
+  if(!href || href === "#"){
+    if(e) e.preventDefault();
+    const toast = document.getElementById('toast');
+    if(toast) {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+  }
+}
+
+function toggleCart(e){
+  if(e && typeof e.preventDefault === 'function') e.preventDefault();
+  const panel = document.getElementById('cartPanel');
+  if (panel) {
+      panel.classList.toggle('show');
+      renderCart();
+  }
+}
+
+// ==========================================
+// 2. SISTEMA UNIFICADO DE COMPRA POR CAJAS
+// ==========================================
+let cart = []; // Tu carrito original de la página
+
+// Cambia el precio visible en la tarjeta inmediatamente al marcar un círculo
+function actualizarPrecioTarjeta(saborId, precioUnitario) {
+    const elPrecio = document.getElementById('precio-' + saborId);
+    if (elPrecio) {
+        elPrecio.innerText = 'S/. ' + precioUnitario.toFixed(2);
+    }
+}
+
+// Sumar o restar cantidades en el visor inferior (- 1 +)
+function cambiarContadorUnidades(saborId, incremento) {
+    const el = document.getElementById('cant-' + saborId);
+    if (!el) return;
+    let cantidad = parseInt(el.innerText);
+    cantidad += incremento;
+    if (cantidad < 1) cantidad = 1;
+    el.innerText = cantidad;
+}
+
+// Recoge la selección del círculo e integra la información directamente en tu carrito original
+function agregarCajaAlPedidoFinal(saborId) {
+    const opciones = document.getElementsByName('caja-' + saborId);
+    let seleccionado = null;
+
+    for (let i = 0; i < opciones.length; i++) {
+        if (opciones[i].checked) {
+            seleccionado = opciones[i];
+            break;
+        }
+    }
+
+    if (!seleccionado) {
+        alert("Por favor, marca primero uno de los círculos (Caja x 3, x 6 o x 9) para poder agregar.");
+        return;
+    }
+
+    const price = parseFloat(seleccionado.value);
+    let unidadesCaja = (price === 3.50) ? 3 : (price === 6.50) ? 6 : 9;
+    
+    const name = "Caja x " + unidadesCaja + " (" + saborId.toUpperCase() + ")";
+    const qty = parseInt(document.getElementById('cant-' + saborId).innerText);
+
+    const found = cart.find(x => x.name === name);
+    if (found) {
+        found.qty += qty;
+    } else {
+        cart.push({ name, price, qty });
+    }
+
+    // Limpiar controles de la tarjeta de brownie
+    seleccionado.checked = false;
+    document.getElementById('cant-' + saborId).innerText = "1";
+    document.getElementById('precio-' + saborId).innerText = "S/. 0.00";
+
+    // Refrescar datos e INVOCAR la apertura automática del panel flotante de la web
+    renderCart();
+    
+    const panel = document.getElementById('cartPanel');
+    if (panel && !panel.classList.contains('show')) {
+        panel.classList.add('show');
+    }
+}
+
+// Renderizador unificado: Agrega la cabecera con botón "X" de cierre interactivo
+function renderCart(){
+  const count = cart.reduce((s, x) => s + x.qty, 0);
+  const badge = document.getElementById('cartCount'); 
+  if (badge) badge.textContent = count;
+  
+  const panel = document.getElementById('cartPanel'); 
+  if (!panel) return;
+  
+  // 1. INYECTAR O MODIFICAR LA CABECERA PARA COLOCOAR EL BOTÓN DE CIERRE EN "X"
+  let cabecera = panel.querySelector('.cart-header-dinamica');
+  if (!cabecera) {
+      cabecera = document.createElement('div');
+      cabecera.className = 'cart-header-dinamica';
+      cabecera.style.display = 'flex';
+      cabecera.style.justify = 'space-between';
+      cabecera.style.alignItems = 'center';
+      cabecera.style.marginBottom = '15px';
+      cabecera.style.borderBottom = '2px solid #e0d0c0';
+      cabecera.style.paddingBottom = '8px';
+      panel.insertBefore(cabecera, panel.firstChild);
+  }
+  cabecera.innerHTML = `
+      <h3 style="margin:0; color:#5c3a21; font-size: 18px;">🛒 Mi Pedido</h3>
+      <button type="button" onclick="document.getElementById('cartPanel').classList.remove('show')" style="background:none; border:none; font-size:22px; font-weight:bold; color:#8b5a2b; cursor:pointer; padding:0 5px; line-height:1;">&times;</button>
+  `;
+  
+  // Renderizar las filas de productos acumulados
+  const contenedorItems = panel.querySelector('.cart-items');
+  if (contenedorItems) {
+      contenedorItems.innerHTML = cart.length ? cart.map(x => `
+          <div class="cart-row" style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+              <span>${x.name} × ${x.qty}</span>
+              <strong>S/ ${(x.price * x.qty).toFixed(2)}</strong>
+          </div>
+      `).join('') : '<p style="text-align: center; color: #999; margin: 15px 0;">Tu pedido está vacío.</p>';
+  }
+  
+  const total = cart.reduce((s, x) => s + x.price * x.qty, 0);
+  const elTotalText = panel.querySelector('.cart-total strong');
+  if (elTotalText) {
+      elTotalText.textContent = 'S/ ' + total.toFixed(2);
+  }
+
+  // ENLAZADOR DE SEGURIDAD: Busca el botón dentro del panel y asegura su clic
+  const btnComprar = panel.querySelector('.btn-comprar') || 
+                      panel.querySelector('.cart-total + button') ||
+                      document.querySelector('.btn-comprar');
+  if (btnComprar) {
+      btnComprar.removeAttribute('onclick');
+      btnComprar.onclick = function(e) {
+          if (e) e.preventDefault();
+          procesarCompraWhatsApp();
+      };
+  }
+}
+
+function procesarCompraWhatsApp() {
+    if (cart.length === 0) {
+        alert("Añade al menos una caja para poder continuar con el pedido.");
+        return;
+    }
+
+    // ⚠️ REEMPLAZA ESTE NÚMERO POR EL TUYO REAL ⚠️
+    // Debe empezar con 51 (Perú) y luego tus 9 dígitos de celular.
+    const numeroTelefono = "+51992920081"; 
+
+    let textoPedido = "🍫 *¡Hola, Brownity! Deseo realizar el siguiente pedido de cajas:*\n\n";
+    let total = 0;
+
+    cart.forEach(item => {
+        const subtotal = item.price * item.qty;
+        textoPedido += `• ${item.qty}x ${item.name} (S/ ${subtotal.toFixed(2)})\n`;
+        total += subtotal;
+    });
+
+    textoPedido += `\n💰 *Total Neto a Pagar: S/ ${total.toFixed(2)}*`;
+
+    // CORREGIDO: Formato de enlace web oficial de WhatsApp para abrir chats automáticos
+    const enlaceWhatsApp = `https://whatsapp.com{numeroTelefono}&text=${encodeURIComponent(textoPedido)}`;
+    
+    // Abre la ventana de chat directo
+    window.open(enlaceWhatsApp, '_blank');
+}
+
+// CONEXIÓN AUTOMÁTICA AL CARGAR LA PÁGINA
+document.addEventListener("DOMContentLoaded", function() {
+    renderCart();
+});
 </script>
+
+
 </body>
 </html>
