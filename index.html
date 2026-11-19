@@ -744,7 +744,7 @@ function agregarCajaAlPedidoFinal(saborId) {
     }
 
     const price = parseFloat(seleccionado.value);
-    let unidadesCaja = (price === 4.00) ? 3 : (price === 8.00) ? 8 : 11;
+    let unidadesCaja = (price === 4.00) ? 3 : (price === 8.00) ? 6 : 9;
     
     const name = "Caja x " + unidadesCaja + " (" + saborId.toUpperCase() + ")";
     const qty = parseInt(document.getElementById('cant-' + saborId).innerText);
